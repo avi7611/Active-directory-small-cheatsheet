@@ -11,10 +11,10 @@ sET-ItEM ( 'V'+'aR' +  'IA' + 'blE:1q2'  + 'uZx'  ) ( [TYpE](  "{1}{0}"-F'F','rE
 To input the output of the first command into second command use this powershell technique
 
 
-`<First command> | %{<Second command> -<argument> $_}
+`<First command> | %{<Second command> -<argument> $_}`
 %{} is an alias for ForEach-Object{}
 ?{} is an alias for Where-Object{}
-$_ is variable`
+$_ is variable
 
 
 To filter out an object type we can use this technique with pipe.
